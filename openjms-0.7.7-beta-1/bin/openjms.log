@@ -1,0 +1,6 @@
+13:24:23.249 INFO  [main] - Server accepting connections on tcp://192.168.100.52:3035/
+13:24:23.252 INFO  [main] - JNDI service accepting connections on tcp://192.168.100.52:3035/
+13:24:23.253 INFO  [main] - Admin service accepting connections on tcp://192.168.100.52:3035/
+13:24:23.333 INFO  [main] - Server accepting connections on rmi://192.168.100.52:1099/
+13:24:23.358 INFO  [main] - JNDI service accepting connections on rmi://192.168.100.52:1099/
+13:24:23.358 INFO  [main] - Admin service accepting connections on rmi://192.168.100.52:1099/
