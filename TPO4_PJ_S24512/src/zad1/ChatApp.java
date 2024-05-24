@@ -2,22 +2,17 @@ package zad1;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ChatApp {
-    private JFrame frame;
-    private JTextField textField;
-    private JButton sendButton;
-    private DefaultListModel<String> listModel;
-    private JList<String> messageList;
-    private Chat chat;
-    private String userName;
+    private final JTextField textField;
+    private final DefaultListModel<String> listModel;
+    private final Chat chat;
+    private final String userName;
 
     public ChatApp(String topic_name, String factoryName, String subscriptionName, String userName) {
         chat = new Chat(topic_name,factoryName, subscriptionName, this);
         this.userName = userName;
-        frame = new JFrame(userName);
+        JFrame frame = new JFrame(userName);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLayout(new BorderLayout());
@@ -25,10 +20,10 @@ public class ChatApp {
         textField = new JTextField();
         frame.add(textField, BorderLayout.NORTH);
         listModel = new DefaultListModel<>();
-        messageList = new JList<>(listModel);
+        JList<String> messageList = new JList<>(listModel);
         JScrollPane scrollPane = new JScrollPane(messageList);
         frame.add(scrollPane, BorderLayout.CENTER);
-        sendButton = new JButton("Send");
+        JButton sendButton = new JButton("Send");
         frame.add(sendButton, BorderLayout.SOUTH);
         sendButton.addActionListener(e -> sendMessage());
         frame.setVisible(true);

@@ -6,33 +6,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class Chat{
-    private Context context;
-    private ConnectionFactory factory;
-    private Connection connection;
-    private String factoryName;
-    private String destName;
-    private Destination dest;
-    private Session session;
-    private MessageProducer sender;
-    private Topic topic;
-    private TopicSubscriber subscriber;
-    private String subscriptionName;
-    private ChatApp chatApp;
+    private final Session session;
+    private final MessageProducer sender;
+    private final TopicSubscriber subscriber;
+    private final ChatApp chatApp;
     public Chat(String topic_name, String factoryName, String subscriptionName, ChatApp chatApp){
         this.chatApp = chatApp;
-        this.factoryName = factoryName;
-        this.destName = topic_name;
-        this.subscriptionName = subscriptionName;
         try { // init config
-            context = new InitialContext();
-            factory = (ConnectionFactory) context.lookup(factoryName);
-            topic = (Topic) context.lookup(destName);
-            connection = factory.createConnection();
+            Context context = new InitialContext();
+            ConnectionFactory factory = (ConnectionFactory) context.lookup(factoryName);
+            Topic topic = (Topic) context.lookup(topic_name);
+            Connection connection = factory.createConnection();
             session = connection.createSession(
                     false, Session.AUTO_ACKNOWLEDGE);
             subscriber = session.createDurableSubscriber(
                     topic, subscriptionName);
-            dest = (Destination) context.lookup(destName);
+            Destination dest = (Destination) context.lookup(topic_name);
             sender = session.createProducer(dest);
             connection.start();
             start();
